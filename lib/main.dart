@@ -19,7 +19,16 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+    const MyHomePage({super.key});
+
+    final List<int> numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+    @override
+    State<MyHomePage> createState() => _MyHomePageState;
+}
+
+class _MyHomePageState extends State<MyHomePage> {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
@@ -37,6 +46,19 @@ class MyHomePage extends StatelessWidget {
                                             textAlign: TextAlign.center, 
                                             style: TextStyle(fontSize: 24)),
                                 ),
+                            ),
+                    ),
+                    Flexible(
+                        child:
+                            GridView.count(
+                                crossAxisCount: 10,
+                                children: [
+                                    Center(
+                                        for (int i = 0; i < len(numbers); i++) {
+                                            Text(numbers)
+                                        }
+                                    ),
+                                ],
                             ),
                     ),
                 ],
