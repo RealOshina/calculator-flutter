@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 
 import 'package:window_manager/window_manager.dart';
 
+import 'calculate.dart';
+
 void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -14,17 +16,13 @@ void main() async {
     if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
         const WindowOptions windowOptions = WindowOptions(
             size: Size(420, 600),
-            center: true,
         );
-
-        //await windowManager.setSize(const Size(420, 600));
-        //await windowManager.setResizable(false);
-
-        //SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
         windowManager.waitUntilReadyToShow(windowOptions, () async {
             await windowManager.show();
-            await windowManager.focus();
+
+            await windowManager.setResizable(false);
+            await windowManager.setMaximizable(false);
         });
     }
 
@@ -59,43 +57,48 @@ class _MyHomePageState extends State<MyHomePage> {
         return Scaffold(
             body: Column(
                 children: [
+                    SizedBox(height: 25),
+
                     Flexible(
                         child: 
                             Container(
                                 height: 100,
                                 alignment: Alignment.topCenter,
                                 color: Color.fromARGB(255, 211, 211, 211),
-                                child: const Align(
+                                child: Align(
                                     child:
-                                        Text('Number', 
+                                        Text(result as String, 
                                             textAlign: TextAlign.center, 
                                             style: TextStyle(fontSize: 42)),
                                 ),
                             ),
                     ),
+
+                    SizedBox(height: 30),
+
                     Flexible(
+                        flex: 3,
                         child:
                             Container(
                                 alignment: Alignment.center,
-                                //color: Color.fromARGB(255, 211, 211, 211),
-                                color: Colors.yellow,
-                                padding: const EdgeInsets.all(25),
+                                color: Color.fromARGB(255, 211, 211, 211),
+                                padding: const EdgeInsets.all(25), 
 
                                 child: Align(
                                         child: GridView.count(
                                             crossAxisCount: 4,
                                             mainAxisSpacing: 10,
                                             crossAxisSpacing: 10,
-                                            childAspectRatio: 1,
+                                            childAspectRatio: 1.2,
 
-                                            shrinkWrap: true,
+                                            shrinkWrap: false,
                                             physics: NeverScrollableScrollPhysics(),
 
                                             children: [
                                                     // Row 1
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.grey,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -103,14 +106,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
 
                                                         onPressed:() {
-                                                            print('1');
+                                                            add_item(1);
                                                         },
 
                                                         child: const Text('1'),
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -125,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -140,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Colors.grey,
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -157,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     // Row 2
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.grey,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -172,7 +175,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -187,7 +190,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -202,7 +205,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Colors.grey,
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -219,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     // Row 3
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.grey,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -234,7 +237,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -249,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -264,7 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Colors.grey,
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -296,7 +299,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Color.fromARGB(255, 180, 180, 180),
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -311,7 +314,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Colors.grey,
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
@@ -319,14 +322,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
 
                                                         onPressed:() {
-                                                            print('=');
+                                                            result_out();
                                                         },
 
                                                         child: const Text('=')
                                                     ),
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
-                                                            backgroundColor: Colors.orange,
+                                                            backgroundColor: Colors.grey,
                                                             foregroundColor: Colors.black,
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius: BorderRadius.circular(12),
