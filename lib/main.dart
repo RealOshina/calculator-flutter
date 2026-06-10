@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 color: Color.fromARGB(255, 211, 211, 211),
                                 child: Align(
                                     child:
-                                        Text(result as String, 
+                                        Text(result_str, 
                                             textAlign: TextAlign.center, 
                                             style: TextStyle(fontSize: 42)),
                                 ),
@@ -121,7 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
 
                                                         onPressed:() {
-                                                            print('2');
+                                                            add_item(2);
                                                         },
 
                                                         child: const Text('2')
@@ -322,7 +322,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                                         ),
 
                                                         onPressed:() {
-                                                            result_out();
+                                                            add_item('=');
                                                         },
 
                                                         child: const Text('=')

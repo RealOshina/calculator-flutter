@@ -1,16 +1,40 @@
-List<double> number = [];
-List<int> buffer = [];
-List<String> operator = [];
+import 'package:flutter/cupertino.dart';
 
-double? result = 0;
+List<int> number_list = [];
+List<int> buffer_list = [];
+List<String> operator_list = [];
 
-void add_item(var number) {
-    if (number is String) {
-        number = double.parse(buffer.join('')) as List<double>;
-        operator.add(number);
+double result = 0;
+String result_str = 'Number';
+
+void add_item(var a) {
+    int value;
+
+    //print(a);
+
+    if (a is int) {
+        buffer_list.add(a);
     }
 
-    buffer.add(number);
+    if (a is String) {
+        if (a == '=') {
+            if (buffer_list.isEmpty) {result_out();}
+
+            value = int.parse(buffer_list.join());
+            print(value);
+
+            number_list.add(value);
+
+            result_out();
+
+            buffer_list.clear();
+        } else {
+            operator_list.add(a);
+        }
+
+    }
+
+    print(buffer_list);
 }
 
 int addition_number(int a, int b) {
@@ -30,9 +54,13 @@ double divide_number(int a, int b) {
 }
 
 void result_out() {
-    print(number);
-    print(buffer);
-    print(operator);
+    print(number_list);
+    print(buffer_list);
+    print(operator_list);
 
     print(result);
+    
+    result_str = result.toString();
+
+    print(result_str);
 }
