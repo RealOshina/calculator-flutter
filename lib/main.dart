@@ -5,6 +5,9 @@ import 'ui/result.dart';
 import 'ui/buttons.dart';
 
 import 'logic/input.dart';
+import 'logic/calculation.dart';
+
+String calculation_text = '';
 
 void main() {
     WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +49,20 @@ class HomePage extends StatefulWidget {
 
 
 class HomePageState extends State<HomePage> {
+    /*
+    @override
+    void init_state() {
+        super.initState();
+        calculation_text = Input.calculation_list_str;
+    }
+    
+    void display_result() {
+      setState(() {
+        calculation_text = Input.calculation_list_str;
+      });
+    }
+    */
+    
     @override
     Widget build(BuildContext context) {
         return Scaffold(

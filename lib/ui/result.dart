@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 import '../logic/calculation.dart';
 import '../logic/input.dart';
 
@@ -15,16 +17,20 @@ class Result {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerRight,
             child: Align(
-                child: TextField(
-                    onChanged: ()
-                    Input.calculation_list.toString().replaceAll('[]', ''),
-                    textAlign: TextAlign.right,
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontSize: 28,
-                        color: Colors.grey,    
-                    )
-                )
+                child: ValueListenableBuilder<String>(
+                    valueListenable: Input.calculation_list_str,
+                    builder: (context, value, child) {
+                        return Text(
+                          value.replaceAll(RegExp(r'[\[\], ]'), ''),
+                          textAlign: TextAlign.right,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 28,
+                              color: Colors.grey,
+                          )
+                        );
+                    }
+                  )
             )
         )
     );
@@ -41,15 +47,20 @@ class Result {
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerRight,
             child: Align(
-                child: Text(
-                    Calculation.result_str,
-                    textAlign: TextAlign.right,
-                    maxLines: 1,
-                    style: TextStyle(
-                        fontSize: 64,
-                        color: Colors.white,
-                    )
-                )
+                child: ValueListenableBuilder<String>(
+                    valueListenable: Calculation.result_str,
+                    builder: (context, value, child) {
+                        return Text(
+                          value,
+                          textAlign: TextAlign.right,
+                          maxLines: 1,
+                          style: TextStyle(
+                              fontSize: 64,
+                              color: Colors.white,
+                          )
+                      );
+                    }
+                  )
             )
         )
     );

@@ -1,6 +1,8 @@
 import 'package:calculator/logic/input.dart';
 import 'package:flutter/material.dart';
 
+import '../main.dart';
+
 import '../logic/calculation.dart';
 
 class Buttons {

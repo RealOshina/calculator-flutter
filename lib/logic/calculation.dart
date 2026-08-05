@@ -1,9 +1,16 @@
+import 'package:flutter/foundation.dart';
+
 class Calculation {
     static double result_double = 0;
-    static String result_str = decimal_logic();
+    static ValueNotifier<String> result_str = ValueNotifier<String>(decimal_logic(result_double));
 
-    static String decimal_logic() {
-        return result_double.toString().replaceAll(RegExp(r'\.0$'), '');
+    static String decimal_logic(double item) {
+       return item.toString().replaceAll(RegExp(r'\.0$'), '');
+    }
+
+    static void update_result(double item) {
+      result_double = item;
+      result_str.value = decimal_logic(item);
     }
 
     static void calculate_divider(List<dynamic> list) {
@@ -13,22 +20,62 @@ class Calculation {
         }
         */
 
-        String operation = '';
-        
-        double a = 0;
-        double b = 0;
+        List<int> z = [];
 
-        List<double> buffer_answer = [];
+        int i = 0;
+        int j = 0;
 
-        int counter = 0;
+        if (!list.contains(int) || !list.contains(String)) {return;}
 
-        dynamic operations = {
-            '+': calculate_add(a, b),
-            '-': calculate_substract(a, b),
-            '*': calculate_multiply(a, b),
-            '/': calculate_divide(a, b)     
-        };
-      
+        while (list.contains(int)) {
+            if (list[i] is int) {
+                if (z.isEmpty) {
+                    j = i;
+
+                    continue;
+                }
+
+                z.add(list[i]);
+            } else if (list[i] is String) {
+                if (z.isEmpty) {
+                    j = i++;
+
+                    continue;
+                }
+                
+                int.tryParse(z.join(''));
+                list.replaceRange(j, i,[z[0].replaceAll(RegExp(r'\[\]'), '')]);
+            }
+
+            i++;
+        }
+
+        while (list.contains('.')) {    
+            z.add(list.indexOf('.', i));
+
+            i++;
+        }
+
+        if (z.isNotEmpty) {
+            i = 0;
+
+            while (z.isNotEmpty) {
+                double a = z[i] as double;
+                double b = z[i] as double;
+
+                i++;
+            }
+        }
+
+        while (list.length < 1) {
+            if (list.contains('*') || list.contains('/')) {
+                
+            } else if (list.contains('+') || list.contains('-')) {
+
+            }
+
+            i++;
+        }
     }
 
     static calculate_add(double a, b) {
@@ -44,14 +91,10 @@ class Calculation {
     }
 
     static calculate_divide(double a, b) {
-        double c;
-
-        try {
-            a / b;
-        } on UnsupportedError {
-            result_str = 'Cannot divide number with 0';
+        if (b == 0) {
+            return result_str.value = 'Cannot divide numbers by 0';
         }
 
-        return;
+        return a / b;
     }
 }
