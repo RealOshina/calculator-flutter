@@ -19,63 +19,37 @@ class Calculation {
             print('Item: $item');
         }
         */
+        
+        List new_list = combined_list(list);
 
-        List<int> z = [];
+        print('new_list: $new_list');
+    }
 
-        int i = 0;
-        int j = 0;
-
-        if (!list.contains(int) || !list.contains(String)) {return;}
-
-        while (list.contains(int)) {
-            if (list[i] is int) {
-                if (z.isEmpty) {
-                    j = i;
-
-                    continue;
+    static combined_list(List list) {
+        List<dynamic> new_list = [];
+        //List<int> current = [];
+        List<String> current = [];
+        
+        for (var item in list) {
+            if (item is int) {
+                current.add(item);
+            } else if (item == '.') {
+                current.add(item);
+            } else if (item is String) {
+                if (current.isNotEmpty) {
+                    new_list.add(int.parse(current.join('')));
+                    current.clear();
                 }
 
-                z.add(list[i]);
-            } else if (list[i] is String) {
-                if (z.isEmpty) {
-                    j = i++;
-
-                    continue;
-                }
-                
-                int.tryParse(z.join(''));
-                list.replaceRange(j, i,[z[0].replaceAll(RegExp(r'\[\]'), '')]);
-            }
-
-            i++;
-        }
-
-        while (list.contains('.')) {    
-            z.add(list.indexOf('.', i));
-
-            i++;
-        }
-
-        if (z.isNotEmpty) {
-            i = 0;
-
-            while (z.isNotEmpty) {
-                double a = z[i] as double;
-                double b = z[i] as double;
-
-                i++;
+                new_list.add(item);
             }
         }
 
-        while (list.length < 1) {
-            if (list.contains('*') || list.contains('/')) {
-                
-            } else if (list.contains('+') || list.contains('-')) {
-
-            }
-
-            i++;
+        if (current.isNotEmpty) {
+            new_list.add(int.parse(current.join('')));
         }
+
+        return new_list;
     }
 
     static calculate_add(double a, b) {
