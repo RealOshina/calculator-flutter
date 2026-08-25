@@ -32,6 +32,8 @@ class Input {
             calculation_list_str.value = calculation_list.toString();
           }
 
+          Calculation.update_result(0);
+
           return;
         }
 

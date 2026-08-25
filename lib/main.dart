@@ -26,6 +26,7 @@ void main() {
     runApp(const MyApp());
 
     Input.calculation_list.clear();
+    Calculation.update_result(0);
 }
 
 class MyApp extends StatelessWidget {
