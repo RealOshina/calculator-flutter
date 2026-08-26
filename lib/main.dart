@@ -68,18 +68,24 @@ class HomePageState extends State<HomePage> {
     Widget build(BuildContext context) {
         return Scaffold(
             backgroundColor: Colors.black87,
-            body: Column(
-                children: [
-                    Result.calculation_box(),
 
-                    const SizedBox(height: 1),
+            body: Center(
+                child: AspectRatio(
+                    aspectRatio: 400 / 650,
+                    child: Column(
+                        children: [
+                            Result.calculation_box(),
 
-                    Result.result_box(),
-                    
-                    const SizedBox(height: 1),
+                            const SizedBox(height: 1),
 
-                    Buttons.buttons_grid(),
-                ]
+                            Result.result_box(),
+                            
+                            const SizedBox(height: 1),
+
+                            Buttons.buttons_grid(),
+                        ]
+                    )
+                )
             )
         );
     }
