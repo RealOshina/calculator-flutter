@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widget_previews.dart';
 
 class Calculation {
     static double result_double = 0;
@@ -32,6 +33,13 @@ class Calculation {
         int? coordinate_a, coordinate_b, coordinate_operation;
 
         while (new_list.length != 1) {
+            int multiply_coordinate = new_list.indexOf('*');
+            int division_coordinate = new_list.indexOf('/');
+
+            if (multiply_coordinate != null || division_coordinate != null) {
+
+            }
+
             for (var i = 0; i < new_list.length; i++) {
                 var item = new_list[i];
                 //var result;
@@ -125,6 +133,11 @@ class Calculation {
 
                     new_list.add(item);
                 }
+            } else if (item == '%') {
+                double percentage = (double.parse(current.join(''))) / 100;
+
+                new_list.add(percentage);
+                current.clear();
             } else if (item is String) {
                 if (current.isNotEmpty) {
                     if (current.contains('.')) {
