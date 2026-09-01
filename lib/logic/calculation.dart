@@ -1,3 +1,4 @@
+    import 'package:calculator/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widget_previews.dart';
 
@@ -11,7 +12,7 @@ class Calculation {
 
     static void update_result(double item) {
       result_double = item;
-      result_str.value = decimal_logic(item);
+      result_str.value = decimal_logic(item); 
     }
 
     static void calculate_divider(List<dynamic> list) {
@@ -33,15 +34,28 @@ class Calculation {
         int? coordinate_a, coordinate_b, coordinate_operation;
 
         while (new_list.length != 1) {
-            int multiply_coordinate = new_list.indexOf('*');
-            int division_coordinate = new_list.indexOf('/');
-
-            if (multiply_coordinate != null || division_coordinate != null) {
-
-            }
-
             for (var i = 0; i < new_list.length; i++) {
                 var item = new_list[i];
+
+            int multiply_coordinate, division_coordinate; 
+
+            if (!new_list.contains('*')) {
+                multiply_coordinate = new_list.indexOf('*');
+            } else {
+                multiply_coordinate = -1;
+            }
+
+            if (!new_list.contains('/')) {
+                division_coordinate = new_list.indexOf('/');
+            } else {
+                division_coordinate = -1;
+            }
+
+            if (multiply_coordinate > division_coordinate) {
+                new_list.replaceRange(coordinate_a!, coordinate_b! + 1, [calculate_multiply(a!, b!)]);
+            } else if (multiply_coordinate < division_coordinate) {
+                new_list.replaceRange(coordinate_a!, coordinate_b! + 1, [calculate_divide(a!, b!)]);
+            }
                 //var result;
 
                 if (item is int || item is double) {
